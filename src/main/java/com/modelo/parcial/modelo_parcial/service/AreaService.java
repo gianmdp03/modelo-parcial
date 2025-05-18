@@ -21,7 +21,7 @@ public class AreaService {
         return areaRepository.save(area);
     }
 
-    public List<Area> modificarArea(Long id, Area area)
+    public List<Area> listarArea()
     {
         return areaRepository.findAll();
     }

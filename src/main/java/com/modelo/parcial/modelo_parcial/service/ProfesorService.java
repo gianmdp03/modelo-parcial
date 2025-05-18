@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.modelo.parcial.modelo_parcial.validation.ProfesorValidator.*;
+
 @Service
 public class ProfesorService {
     @Autowired
@@ -16,11 +18,14 @@ public class ProfesorService {
 
     public Profesor crearProfesor(Profesor profesor)
     {
+        comprobarArea(profesor, profesorRepository);
+        comprobarEmail(profesor.getEmail(), profesorRepository);
         return profesorRepository.save(profesor);
     }
 
     public Optional<Profesor> modificarProfesor(Long id, Profesor profesor)
     {
+        comprobarEmail(profesor.getEmail(), profesorRepository);
         return profesorRepository.findById(id).map(existing -> {
             existing.setNombre(profesor.getNombre());
             existing.setApellido(profesor.getApellido());
@@ -36,7 +41,14 @@ public class ProfesorService {
 
     public void eliminarProfesorPorId(Long id)
     {
+        comprobarSiExisteId(id, profesorRepository);
         profesorRepository.deleteById(id);
+    }
+
+    public void eliminarProfesorPorEmail(String email)
+    {
+        comprobarSiExisteEmail(email, profesorRepository);
+        profesorRepository.deleteByEmail(email);
     }
 
 }

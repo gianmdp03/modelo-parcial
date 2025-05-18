@@ -17,12 +17,14 @@ public class AlumnoService {
 
     public Alumno crearAlumno(Alumno alumno)
     {
+        comprobarFichaMedica(alumno, alumnoRepository);
         comprobarEmail(alumno.getEmail(), alumnoRepository);
         return alumnoRepository.save(alumno);
     }
 
     public Optional<Alumno> modificarAlumno(Long id, Alumno alumno)
     {
+        comprobarSiExisteId(id, alumnoRepository);
         comprobarEmail(alumno.getEmail(), alumnoRepository);
         return alumnoRepository.findById(id).map(existing -> {
             existing.setNombre(alumno.getNombre());
