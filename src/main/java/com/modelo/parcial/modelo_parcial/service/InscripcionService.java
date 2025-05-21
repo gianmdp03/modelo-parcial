@@ -14,6 +14,7 @@ public class InscripcionService {
 
     public Inscripcion crearInscripion(Inscripcion inscripcion)
     {
+        validarCupo(inscripcion, inscripcionRepository);
         comprobarAlumnoInscripto(inscripcion.getAlumno(), inscripcion.getCurso(), inscripcionRepository);
         return inscripcionRepository.save(inscripcion);
     }
@@ -22,11 +23,4 @@ public class InscripcionService {
         comprobarIdCurso(id, inscripcionRepository);
         inscripcionRepository.deleteById(id);
     }
-
-    public void eliminarInscripcionPorEmailAlumnoYCurso(String email, Curso curso)
-    {
-        comprobarEmailAlumnoYCurso(email, curso, inscripcionRepository);
-        inscripcionRepository.deleteByAlumnoEmailAndCurso(email, curso);
-    }
-
 }

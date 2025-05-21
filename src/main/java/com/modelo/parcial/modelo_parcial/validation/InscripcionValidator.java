@@ -22,13 +22,7 @@ public class InscripcionValidator {
             throw new NoEncontradoException("Error: El ID ingresado no existe");
         }
     }
-    public static void comprobarEmailAlumnoYCurso(String email, Curso curso, InscripcionRepository inscripcionRepository)
-    {
-        if(!(inscripcionRepository.existsByAlumnoEmailAndCurso(email, curso)))
-        {
-            throw new NoEncontradoException("Error: El email o el curso ingresado no existen");
-        }
-    }
+
     public static void validarCupo(Inscripcion inscripcion, InscripcionRepository inscripcionRepository)
     {
         if(inscripcionRepository.count()>=inscripcion.getCurso().getCupoMaximo())
