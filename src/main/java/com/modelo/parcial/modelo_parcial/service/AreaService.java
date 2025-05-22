@@ -4,9 +4,9 @@ import com.modelo.parcial.modelo_parcial.model.Area;
 import com.modelo.parcial.modelo_parcial.repository.AreaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.modelo.parcial.modelo_parcial.validation.AreaValidator.*;
 
@@ -26,6 +26,7 @@ public class AreaService {
         return areaRepository.findAll();
     }
 
+    @Transactional
     public void eliminarAreaPorNombre(String nombre)
     {
         comprobarAreaExistentePorNombre(nombre, areaRepository);

@@ -5,6 +5,7 @@ import com.modelo.parcial.modelo_parcial.exception.NoEncontradoException;
 import com.modelo.parcial.modelo_parcial.model.Alumno;
 import com.modelo.parcial.modelo_parcial.model.Curso;
 import com.modelo.parcial.modelo_parcial.model.Inscripcion;
+import com.modelo.parcial.modelo_parcial.repository.CursoRepository;
 import com.modelo.parcial.modelo_parcial.repository.InscripcionRepository;
 
 public class InscripcionValidator {
@@ -23,11 +24,13 @@ public class InscripcionValidator {
         }
     }
 
-    public static void validarCupo(Inscripcion inscripcion, InscripcionRepository inscripcionRepository)
+    public static void validarCupo(Inscripcion inscripcion, InscripcionRepository inscripcionRepository, CursoRepository cursoRepository)
     {
-        if(inscripcionRepository.count()>=inscripcion.getCurso().getCupoMaximo())
+        Curso curso = cursoRepository.getReferenceById(inscripcion.getCurso().getId());
+        Long inscriptos = inscripcionRepository.countByCursoId(inscripcion.getCurso().getId());
+        if(inscriptos>=curso.getCupoMaximo())
         {
-            throw new ConflictoException("Error: Este curso ya alcanzó su cupo máximo");
+            throw new ConflictoException("Error: Cupo Maximo");
         }
     }
 }

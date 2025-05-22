@@ -18,7 +18,17 @@ import java.util.Optional;
 public class AlumnoController {
     @Autowired
     private AlumnoService alumnoService;
+/*
+{
+    "nombre": "Lucas",
+    "apellido": "Rodriguez",
+    "email": "lucasrodriguez@hotmail.com",
+    "fichaMedica": {
+        "observacion" : "Esta perfecto"
+    }
+}
 
+ */
     @PostMapping
     public ResponseEntity<Alumno> crearAlumno(@Valid @RequestBody Alumno alumno)
     {
@@ -34,14 +44,19 @@ public class AlumnoController {
     {
         return ResponseEntity.status(HttpStatus.OK).body(alumnoService.listarAlumnos());
     }
-    @DeleteMapping("/id")
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Optional<Alumno>> mostrarPorEmail(@PathVariable String email)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.mostrarPorEmail(email));
+    }
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<Void> eliminarAlumno(@PathVariable Long id)
     {
         alumnoService.eliminarAlumno(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @DeleteMapping("/email/{email}")
-    public ResponseEntity<Void> eliminarAlumnoPorEmail(@Valid @PathVariable String email)
+    public ResponseEntity<Void> eliminarAlumnoPorEmail(@PathVariable String email)
     {
         alumnoService.eliminarAlumnoPorEmail(email);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

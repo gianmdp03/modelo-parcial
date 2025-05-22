@@ -1,4 +1,6 @@
 package com.modelo.parcial.modelo_parcial.model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +18,6 @@ public class Inscripcion {
     @Column(nullable = false)
     private String estado;
 
-    @NotNull
     @Column(nullable = false)
     private LocalDate fechaInscripcion;
 

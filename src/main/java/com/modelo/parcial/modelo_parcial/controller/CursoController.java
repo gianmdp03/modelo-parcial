@@ -23,8 +23,8 @@ public class CursoController {
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.crearCurso(curso));
     }
-    @PutMapping
-    public ResponseEntity<Optional<Curso>> modificarCurso(@PathVariable Long id, @Valid @RequestBody Curso curso)
+    @PutMapping("/id/{id}")
+    public ResponseEntity<Optional<Curso>> modificarCurso(@PathVariable Long id, @RequestBody Curso curso)
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(cursoService.modificarCurso(id, curso));
     }
@@ -33,8 +33,13 @@ public class CursoController {
     {
         return ResponseEntity.status(HttpStatus.OK).body(cursoService.listarCurso());
     }
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Optional<Curso>> mostrarPorId(@PathVariable Long id)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(cursoService.mostrarPorId(id));
+    }
     @GetMapping("/email/{email}")
-    public ResponseEntity<List<Curso>> filtrarPorProfesor(@Valid @PathVariable String email)
+    public ResponseEntity<List<Curso>> filtrarPorProfesor(@PathVariable String email)
     {
         return ResponseEntity.status(HttpStatus.OK).body(cursoService.filtrarPorProfesor(email));
     }

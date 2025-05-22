@@ -1,11 +1,15 @@
 package com.modelo.parcial.modelo_parcial.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@Table(name = "cursos")
+@Entity
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +28,7 @@ public class Curso {
     private Profesor profesor;
 
     @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private Set<Inscripcion> inscripciones = new HashSet<>();
 
     public Curso() {

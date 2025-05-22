@@ -38,7 +38,7 @@ public class AreaController {
     }
 
     @DeleteMapping("/nombre/{nombre}")
-    public ResponseEntity<Void> eliminarPorNombre(@Valid @PathVariable String nombre)
+    public ResponseEntity<Void> eliminarPorNombre(@PathVariable String nombre)
     {
         areaService.eliminarAreaPorNombre(nombre);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

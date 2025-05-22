@@ -4,6 +4,7 @@ import com.modelo.parcial.modelo_parcial.model.Alumno;
 import com.modelo.parcial.modelo_parcial.repository.AlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,13 +39,17 @@ public class AlumnoService {
     {
         return alumnoRepository.findAll();
     }
-
+    public Optional<Alumno> mostrarPorEmail(String email)
+    {
+        return alumnoRepository.findByEmail(email);
+    }
     public void eliminarAlumno(Long id)
     {
         comprobarSiExisteId(id, alumnoRepository);
         alumnoRepository.deleteById(id);
     }
 
+    @Transactional
     public void eliminarAlumnoPorEmail(String email)
     {
         comprobarSiExisteEmail(email, alumnoRepository);

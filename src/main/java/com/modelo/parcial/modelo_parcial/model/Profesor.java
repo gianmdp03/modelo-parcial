@@ -1,4 +1,6 @@
 package com.modelo.parcial.modelo_parcial.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +34,7 @@ public class Profesor {
     private Area area;
 
     @OneToMany(mappedBy = "profesor")
+    @JsonIgnore
     private Set<Curso> cursos = new HashSet<>();
 
     public Profesor() {

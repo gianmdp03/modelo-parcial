@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/inscripcion")
@@ -30,4 +31,15 @@ public class InscripcionController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @GetMapping
+    public ResponseEntity<List<Inscripcion>> listarInscripcion()
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(inscripcionService.listarInscripciones());
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Optional<Inscripcion>> mostrarPorId(@PathVariable Long id)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(inscripcionService.mostrarPorId(id));
+    }
 }

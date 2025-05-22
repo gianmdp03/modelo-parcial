@@ -31,7 +31,10 @@ public class CursoService {
            return cursoRepository.save(existing);
         });
     }
-
+    public Optional<Curso> mostrarPorId(Long id)
+    {
+        return cursoRepository.findById(id);
+    }
     public List<Curso> listarCurso()
     {
         return cursoRepository.findAll();

@@ -5,6 +5,7 @@ import com.modelo.parcial.modelo_parcial.repository.ProfesorRepository;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,10 @@ public class ProfesorService {
         comprobarEmail(profesor.getEmail(), profesorRepository);
         return profesorRepository.save(profesor);
     }
-
+    public Optional<Profesor> mostrarPorEmail(String email)
+    {
+        return profesorRepository.findByEmail(email);
+    }
     public Optional<Profesor> modificarProfesor(Long id, Profesor profesor)
     {
         comprobarEmail(profesor.getEmail(), profesorRepository);
@@ -45,6 +49,7 @@ public class ProfesorService {
         profesorRepository.deleteById(id);
     }
 
+    @Transactional
     public void eliminarProfesorPorEmail(String email)
     {
         comprobarSiExisteEmail(email, profesorRepository);

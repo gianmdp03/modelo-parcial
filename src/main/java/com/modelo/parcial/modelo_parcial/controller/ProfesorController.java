@@ -24,6 +24,11 @@ public class ProfesorController {
     {
         return ResponseEntity.status(HttpStatus.CREATED).body(profesorService.crearProfesor(profesor));
     }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Optional<Profesor>> mostrarPorEmail(@PathVariable String email)
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(profesorService.mostrarPorEmail(email));
+    }
     @GetMapping
     public ResponseEntity<List<Profesor>> listarProfesores()
     {
@@ -41,7 +46,7 @@ public class ProfesorController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @DeleteMapping("/email/{email}")
-    public ResponseEntity<Void> eliminarProfesorPorEmail(@Valid @PathVariable String email)
+    public ResponseEntity<Void> eliminarProfesorPorEmail(@PathVariable String email)
     {
         profesorService.eliminarProfesorPorEmail(email);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

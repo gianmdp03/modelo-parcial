@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AreaRepository extends JpaRepository<Area, Long> {
-    public void deleteByNombre(String nombre);
-    public boolean existsByNombre(String nombre);
+    void deleteByNombre(String nombre);
+    boolean existsByNombre(String nombre);
 }
